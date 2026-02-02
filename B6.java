@@ -1,76 +1,83 @@
-class User{
-    private int userId;
+class User {
+    private final int id;   // final: khong the thay doi sau khi tao
+
     private String username;
     private String password;
-    private String email;
 
-    private boolean passwordValid = true;
-    private boolean emailValid = true;
-
-    public User(int userId , String username , String password , String email){
-        this.userId = userId;
+    public User(int id, String username, String password) {
+        this.id = id;
         this.username = username;
-        setPassword(password);
-        setEmail(email);
+        this.password = password;
     }
 
-    public int getUserId(){
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
 
-    public String getEmail(){
-        return email;
+    public boolean checkPassword(String password) {
+        return this.password.equalsIgnoreCase(password);
     }
 
-    public void setPassword(String password){
-        if(password != null && !password.trim().isEmpty()){
-            this.password = password;
-            passwordValid = true;
-        }else{
-            this.password = password;
-            passwordValid = false;
+    @Override
+    public String toString() {
+        return "User[id=" + id + ", username=" + username + "]";
+    }
+}
+
+class UserManager {
+    static User[] users = new User[10];
+    static int count = 0;
+
+    public static void addUser(User user) {
+        if (count < users.length) {
+            users[count] = user;
+            count++;
+            System.out.println("Them thanh cong user: " + user.getUsername());
+        } else {
+            System.out.println("Danh sach user da day");
         }
     }
 
-    public void setEmail(String email){
-        if(email != null && email.contains("@")){
-            this.email = email;
-            emailValid = true;
-        }else{
-            this.email = email;
-            emailValid = false;
+    public static boolean checkLogin(String username, String password) {
+        for (int i = 0; i < count; i++) {
+            if (users[i].getUsername().equalsIgnoreCase(username)
+                    && users[i].checkPassword(password)) {
+                return true;
+            }
         }
+        return false;
     }
 
-    public void displayInfo(){
-        System.out.println("Ma nguoi dung :"+userId);
-        System.out.println("Ten nguoi dung :"+username);
-        if(emailValid){
-            System.out.println("Email :"+email);
-        }else{
-            System.out.println("Email khong hop le");
+    public static void showAllUsers() {
+        System.out.println("Danh sach nguoi dung:");
+        for (int i = 0; i < count; i++) {
+            System.out.println((i + 1) + ". " + users[i]);
         }
-        if(passwordValid){
-            System.out.println("Password :"+password);
-        }else{
-            System.out.println("Password khong duoc rong");
-        }
-        System.out.println("--------------------");
     }
 }
 
 public class B6 {
-    public static void main(String[] args){
-        User user1 = new User(1 , "ngo quang anh" , "190303" , "ngoquanganh2003a@gmail.com");
-        User user2 = new User(2 , "anh quang" , "" , "anhquang@gmail.com");
-        User user3 = new User(3 , "quang anh" , "190303" , "anhquang");
+    public static void main(String[] args) {
 
-        user1.displayInfo();
-        user2.displayInfo();
-        user3.displayInfo();
+        User u1 = new User(1, "hieu", "123456");
+        User u2 = new User(2, "admin", "admin123");
+        User u3 = new User(3, "student", "sv2024");
+
+        UserManager.addUser(u1);
+        UserManager.addUser(u2);
+        UserManager.addUser(u3);
+
+        System.out.println("\nDa them 3 user");
+        UserManager.showAllUsers();
+
+        System.out.println("\nKiem tra dang nhap:");
+        System.out.println("Login (hieu, 123456): "
+                + (UserManager.checkLogin("hieu", "123456") ? "Thanh cong" : "That bai"));
+        System.out.println("Login (student, 123): "
+                + (UserManager.checkLogin("student", "123") ? "Thanh cong" : "That bai"));
     }
 }
