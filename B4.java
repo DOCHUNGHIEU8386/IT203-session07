@@ -1,45 +1,33 @@
-class Employee {
-    private String employeeId;
-    private String employeeName;
-    private double salary;
+class Classroom {
+    // Bien instance - ten hoc sinh (rieng tung nguoi)
+    private String name;
 
-    // constructor khong tham so
-    public Employee(){
-        this.employeeId = "";
-        this.employeeName = "";
-        this.salary = 0;
+    // Bien static - quy lop (dung chung)
+    private static double classFund = 0;
+
+    public Classroom(String name) {
+        this.name = name;
     }
 
-    // constructor co ma va ten
-    public Employee(String employeeId , String employeeName){
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.salary = 0;
+    public void contribute(double amount) {
+        classFund += amount;
+        System.out.println("Hoc sinh " + name + " dong gop: " + amount);
     }
 
-    //constructor co day du
-    public Employee(String employeeId , String employeeName , double salary){
-        this.employeeId = employeeId;
-        this.employeeName = employeeName;
-        this.salary = salary;
-    }
-
-    public void displayInfo(){
-        System.out.println("Ma nhan vien :"+employeeId);
-        System.out.println("Ten nhan vien :"+employeeId);
-        System.out.println("Luong :"+salary);
-        System.out.println("--------------------");
+    public static void showClassFund() {
+        System.out.println("Tong quy lop: " + classFund);
     }
 }
 
 public class B4 {
-    public static void main(String[] args){
-        Employee employee1 = new Employee();
-        Employee employee2 = new Employee("NV1" , "Ngo quang anh");
-        Employee employee3 = new Employee("NV2" , "Anh Quang" , 50000000);
+    public static void main(String[] args) {
 
-        employee1.displayInfo();
-        employee2.displayInfo();
-        employee3.displayInfo();
+        Classroom c1 = new Classroom("Do Chung Hieu");
+        Classroom c2 = new Classroom("Nguyen Van A");
+
+        c1.contribute(20000);
+        c2.contribute(30000);
+
+        Classroom.showClassFund();
     }
 }
