@@ -1,35 +1,35 @@
-class Account{
-    private String username;
-    private String password;
-    private String email;
+class Nguoi {
+    String hoTen;
 
-    public Account(String username , String password , String email){
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-
-    public void changePassword(String newPassword){
-        this.password = newPassword;
-        System.out.println("Doi mat khau thanh cong");
-    }
-
-    public void displayInfo(){
-        System.out.println("Username : "+username);
-        System.out.println("Email : "+email);
-        System.out.println("Password : ********");
-        System.out.println("---------------");
+    public Nguoi(String hoTen) {
+        this.hoTen = hoTen;
     }
 }
 
-public class B2 {
-    public static void main(String[] args){
-        Account account1 = new Account("quanganh" , "190303" , "ngoquanganh2003a@gmail.com");
+public class Bai2_Primitive_Reference {
+    public static void main(String[] args) {
 
-        account1.displayInfo();
+        // ===== KIỂU PRIMITIVE =====
+        int x = 15;
+        int y = x; // sao chép GIÁ TRỊ
 
-        account1.changePassword("0386878941");
+        y = 30;
 
-        account1.displayInfo();
+        System.out.println("=== PRIMITIVE ===");
+        System.out.println("x = " + x); // 15
+        System.out.println("y = " + y); // 30
+        // Primitive: biến độc lập, không ảnh hưởng lẫn nhau
+
+
+        // ===== KIỂU REFERENCE =====
+        Nguoi n1 = new Nguoi("Do Chung Hieu");
+        Nguoi n2 = n1; // sao chép ĐỊA CHỈ
+
+        n2.hoTen = "B24DTCN336";
+
+        System.out.println("\n=== REFERENCE ===");
+        System.out.println("Nguoi 1 : " + n1.hoTen); // B24DTCN336
+        System.out.println("Nguoi 2 : " + n2.hoTen); // B24DTCN336
+        // Reference: nhiều biến cùng trỏ đến 1 object
     }
 }
