@@ -1,33 +1,42 @@
-class Classroom {
-    // Bien instance - ten hoc sinh (rieng tung nguoi)
-    private String name;
+public class Main {
 
-    // Bien static - quy lop (dung chung)
-    private static double classFund = 0;
+    // ===== Lớp ClassRoom =====
+    static class ClassRoom {
 
-    public Classroom(String name) {
-        this.name = name;
+        // Biến static - quỹ chung của lớp
+        private static double classFund = 0;
+
+        // Biến instance - riêng từng sinh viên
+        private String studentName;
+
+        public ClassRoom(String studentName) {
+            this.studentName = studentName;
+        }
+
+        // Sinh viên đóng tiền vào quỹ lớp
+        public void contribute(double amount) {
+            if (amount > 0) {
+                classFund += amount;
+                System.out.println(studentName + " da dong " + amount + " vao quy lop.");
+            }
+        }
+
+        // Xem tổng quỹ lớp (static)
+        public static double getClassFund() {
+            return classFund;
+        }
     }
 
-    public void contribute(double amount) {
-        classFund += amount;
-        System.out.println("Hoc sinh " + name + " dong gop: " + amount);
-    }
-
-    public static void showClassFund() {
-        System.out.println("Tong quy lop: " + classFund);
-    }
-}
-
-public class B4 {
     public static void main(String[] args) {
 
-        Classroom c1 = new Classroom("Do Chung Hieu");
-        Classroom c2 = new Classroom("Nguyen Van A");
+        ClassRoom s1 = new ClassRoom("An");
+        ClassRoom s2 = new ClassRoom("Binh");
+        ClassRoom s3 = new ClassRoom("Cuong");
 
-        c1.contribute(20000);
-        c2.contribute(30000);
+        s1.contribute(100_000);
+        s2.contribute(150_000);
+        s3.contribute(200_000);
 
-        Classroom.showClassFund();
+        System.out.println("\nTong quy lop: " + ClassRoom.getClassFund());
     }
 }
