@@ -1,32 +1,43 @@
-import java.time.LocalDate;
+class SinhVien {
+    // Thuộc tính riêng của mỗi sinh viên
+    private String mssv;
+    private String hoTen;
 
-class Student{
-    private String studentId;
-    private String fullName;
-    private LocalDate dateOfBirth;
-    private double averageScore;
+    // Thuộc tính static – dùng chung cho tất cả sinh viên
+    private static int soLuongSV = 0;
 
-    public Student(String studentId , String fullName , LocalDate dateOfBirth , double averageScore){
-        this.studentId = studentId;
-        this.fullName = fullName;
-        this.dateOfBirth = dateOfBirth;
-        this.averageScore = averageScore;
+    // Constructor
+    public SinhVien(String mssv, String hoTen) {
+        this.mssv = mssv;
+        this.hoTen = hoTen;
+        soLuongSV++;
     }
 
-    public void displayInfo(){
-        System.out.println("Ma sinh vien : " +studentId);
-        System.out.println("Ho ten sinh vien : "+fullName);
-        System.out.println("Ngay sinh : "+dateOfBirth);
-        System.out.println("Diem trung binh : "+averageScore);
-        System.out.println("------------------------------");
+    // Phương thức hiển thị thông tin sinh viên
+    public void hienThiThongTin() {
+        System.out.println("MSSV : " + mssv);
+        System.out.println("Ho ten : " + hoTen);
+        System.out.println("---------------------");
+    }
+
+    // Phương thức static hiển thị tổng số sinh viên
+    public static void hienThiSoLuongSV() {
+        System.out.println("Tong so sinh vien : " + soLuongSV);
     }
 }
 
-public class B1{
+public class Bai1_Static {
     public static void main(String[] args) {
-        Student student1 = new Student("SV1" , "Ngo Quang Anh" , LocalDate.of(2003 , 3 , 19) , 8.50);
-        Student student2 = new Student("SV2" , "Anh Quang" , LocalDate.of(2006 , 2 , 12) , 10);
-        student1.displayInfo();
-        student2.displayInfo();
+
+        SinhVien sv1 = new SinhVien("B24DTCN336", "Do Chung Hieu");
+        SinhVien sv2 = new SinhVien("B24DTCN337", "Nguyen Van A");
+        SinhVien sv3 = new SinhVien("B24DTCN338", "Tran Van B");
+
+        sv1.hienThiThongTin();
+        sv2.hienThiThongTin();
+        sv3.hienThiThongTin();
+
+        // Gọi phương thức static thông qua tên lớp
+        SinhVien.hienThiSoLuongSV();
     }
 }
