@@ -1,33 +1,36 @@
 public class Main {
 
-    // ===== Class Student (biến tham chiếu) =====
-    static class Student {
-        String name;
+    // ===== Utility Class =====
+    static class ScoreUtils {
 
-        Student(String name) {
-            this.name = name;
+        // Kiểm tra Đạt / Trượt
+        public static boolean checkPass(double score) {
+            return score >= 5.0;
+        }
+
+        // Tính điểm trung bình
+        public static double calculateAverage(double[] scores) {
+            double sum = 0;
+            for (double s : scores) {
+                sum += s;
+            }
+            return sum / scores.length;
         }
     }
 
     public static void main(String[] args) {
 
-        // ===== BIẾN NGUYÊN THỦY =====
-        int a = 10;
-        int b = a;   // sao chép GIÁ TRỊ
-        b = 20;
+        double[] scores = {6.5, 8.0, 4.5};
 
-        System.out.println("=== BIEN NGUYEN THUY ===");
-        System.out.println("a = " + a); // 10
-        System.out.println("b = " + b); // 20
+        System.out.println("Danh sách điểm: 6.5, 8.0, 4.5");
+        System.out.println("\n>> Kết quả xử lý:");
 
-        // ===== BIẾN THAM CHIẾU =====
-        Student s1 = new Student("An");
-        Student s2 = s1; // sao chép ĐỊA CHỈ
+        double avg = ScoreUtils.calculateAverage(scores);
+        System.out.printf("- Điểm trung bình cả lớp: %.2f\n", avg);
 
-        s2.name = "Binh";
-
-        System.out.println("\n=== BIEN THAM CHIEU ===");
-        System.out.println("s1.name = " + s1.name); // Binh
-        System.out.println("s2.name = " + s2.name); // Binh
+        for (double s : scores) {
+            System.out.println("- Điểm " + s + ": "
+                    + (ScoreUtils.checkPass(s) ? "Đạt" : "Trượt"));
+        }
     }
 }
