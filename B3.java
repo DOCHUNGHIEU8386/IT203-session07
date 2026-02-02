@@ -1,55 +1,23 @@
-class Product{
-    private String productId;
-    private String productName;
-    private double price;
+class ScoreUtils {
 
-    public Product(String productId , String productName , double price){
-        this.productId = productId;
-        this.productName = productName;
-        setPrice(price);
+    // Kiem tra qua mon
+    public static boolean isPass(double score) {
+        return score >= 5.0;
     }
 
-    public String getProductId(){
-        return productId;
-    }
-
-    public String getProductName(){
-        return productName;
-    }
-
-    public double getPrice(){
-        return price;
-    }
-
-    public void setPrice(double price){
-        if(price > 0){
-            this.price = price;
-        }else{
-            System.out.println("Gia san pham phai > 0");
-            System.out.println("---------------------");
-        }
-    }
-
-    public void displayInfo(){
-        System.out.println("Ma san pham :" +productId);
-        System.out.println("Ten san pham :"+productName);
-        System.out.println("Gia san pham :"+price);
-        System.out.println("---------------------");
+    // Tinh diem trung binh
+    public static double calculateAverage(double s1, double s2, double s3) {
+        return (s1 + s2 + s3) / 3;
     }
 }
 
 public class B3 {
-    public static void main(String[] args){
-        Product product1 = new Product("SP01" , "Iphone 17" , 150000000);
+    public static void main(String[] args) {
 
-        product1.displayInfo();
+        double avg = ScoreUtils.calculateAverage(6.5, 7.0, 8.0);
+        System.out.println("Diem trung binh = " + avg);
 
-        product1.setPrice(-1500000000);
-
-        product1.displayInfo();
-
-        product1.setPrice(150000000);
-
-        product1.displayInfo();
+        boolean pass = ScoreUtils.isPass(avg);
+        System.out.println("Qua mon = " + pass);
     }
 }
