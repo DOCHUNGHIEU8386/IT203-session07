@@ -1,43 +1,27 @@
-class SinhVien {
-    // Thuộc tính riêng của mỗi sinh viên
-    private String mssv;
-    private String hoTen;
+public class Student {
 
-    // Thuộc tính static – dùng chung cho tất cả sinh viên
-    private static int soLuongSV = 0;
+    // ===== Biến instance (mỗi sinh viên có riêng) =====
+    private String studentId;
+    private String studentName;
 
-    // Constructor
-    public SinhVien(String mssv, String hoTen) {
-        this.mssv = mssv;
-        this.hoTen = hoTen;
-        soLuongSV++;
+    // ===== Biến static (dùng chung cho tất cả) =====
+    private static int totalStudent = 0;
+
+    // ===== Constructor =====
+    public Student(String studentId, String studentName) {
+        this.studentId = studentId;
+        this.studentName = studentName;
+        totalStudent++; // Mỗi lần tạo sinh viên -> tăng 1
     }
 
-    // Phương thức hiển thị thông tin sinh viên
-    public void hienThiThongTin() {
-        System.out.println("MSSV : " + mssv);
-        System.out.println("Ho ten : " + hoTen);
-        System.out.println("---------------------");
+    // ===== Hiển thị thông tin sinh viên =====
+    public void displayInfo() {
+        System.out.println("MSSV: " + studentId);
+        System.out.println("Họ tên: " + studentName);
     }
 
-    // Phương thức static hiển thị tổng số sinh viên
-    public static void hienThiSoLuongSV() {
-        System.out.println("Tong so sinh vien : " + soLuongSV);
-    }
-}
-
-public class Bai1_Static {
-    public static void main(String[] args) {
-
-        SinhVien sv1 = new SinhVien("B24DTCN336", "Do Chung Hieu");
-        SinhVien sv2 = new SinhVien("B24DTCN337", "Nguyen Van A");
-        SinhVien sv3 = new SinhVien("B24DTCN338", "Tran Van B");
-
-        sv1.hienThiThongTin();
-        sv2.hienThiThongTin();
-        sv3.hienThiThongTin();
-
-        // Gọi phương thức static thông qua tên lớp
-        SinhVien.hienThiSoLuongSV();
+    // ===== Hiển thị tổng số sinh viên =====
+    public static int getTotalStudent() {
+        return totalStudent;
     }
 }
